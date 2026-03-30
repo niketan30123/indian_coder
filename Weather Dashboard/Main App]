@@ -1,0 +1,43 @@
+// src/App.jsx
+import { useEffect, useState } from "react";
+import { states } from "./data/states";
+import { getWeather } from "./services/api";
+import WeatherGrid from "./components/WeatherGrid";
+
+export default function App() {
+  const [weatherData, setWeatherData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchWeather = async () => {
+    try {
+      const results = await Promise.all(
+        states.map(async (state) => {
+          const data = await getWeather(state.lat, state.lon);
+          return { ...data, name: state.name };
+        })
+      );
+      setWeatherData(results);
+    } catch (err) {
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchWeather();
+  }, []);
+
+  return (
+    <div className="p-6 bg-gray-900 min-h-screen">
+      <h1 className="text-3xl text-white mb-6">
+        🇮🇳 India Weather Dashboard
+      </h1>
+
+      {loading ? (
+        <p className="text-white">Loading...</p>
+      ) : (
+        <WeatherGrid weatherData={weatherData} />
+      )}
+    </div>
+  );
+}    

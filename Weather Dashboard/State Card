@@ -1,0 +1,20 @@
+export default function StateCard({ data }) {
+  if (!data) return null;
+
+  const temp = data.main.temp;
+  const weather = data.weather[0].main;
+
+  const getColor = () => {
+    if (temp > 35) return "bg-red-500";
+    if (temp > 25) return "bg-yellow-400";
+    return "bg-blue-400";
+  };
+
+  return (
+    <div className={`p-4 rounded-xl shadow text-white ${getColor()}`}>
+      <h2 className="text-xl font-bold">{data.name}</h2>
+      <p className="text-2xl">{temp}°C</p>
+      <p>{weather}</p>
+    </div>
+  );
+} 
