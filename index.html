@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Fusion | Windy-style Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <h1>Weather Fusion</h1>
+    <p>Windy-like interface with real Open-Meteo model fields (ECMWF, GFS, ICON)</p>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="card">
+        <h2>Weather Model</h2>
+        <div class="model-grid" id="modelGrid">
+          <button class="model active" data-model="ecmwf">ECMWF</button>
+          <button class="model" data-model="gfs">GFS</button>
+          <button class="model" data-model="icon">ICON</button>
+        </div>
+        <small id="modelDescription">ECMWF: high-skill medium-range global model.</small>
+      </section>
+
+      <section class="card">
+        <h2>Layers</h2>
+        <label><input type="checkbox" data-layer="precipitation" checked /> Precipitation</label>
+        <label><input type="checkbox" data-layer="temperature" checked /> Temperature</label>
+        <label><input type="checkbox" data-layer="wind" checked /> Wind</label>
+        <label><input type="checkbox" data-layer="cyclone" checked /> Cyclone Tracking</label>
+      </section>
+
+      <section class="card">
+        <h2>Forecast Hour</h2>
+        <input type="range" id="hourRange" min="0" max="120" step="6" value="0" />
+        <div class="range-meta">
+          <span>+<strong id="hourValue">0</strong>h</span>
+          <span id="forecastTime">Initializing…</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Legend</h2>
+        <div class="legend-tabs">
+          <button class="legend-tab active" data-legend="precipitation">Precip</button>
+          <button class="legend-tab" data-legend="temperature">Temp</button>
+          <button class="legend-tab" data-legend="wind">Wind</button>
+        </div>
+        <div id="legendScale" class="legend-scale"></div>
+        <div id="legendTicks" class="legend-ticks"></div>
+      </section>
+
+      <section class="card point-data">
+        <h2>Point Forecast</h2>
+        <p>Click map to sample model-specific current values from Open-Meteo.</p>
+        <ul id="pointValues">
+          <li>Temperature: --</li>
+          <li>Wind speed: --</li>
+          <li>Precipitation: --</li>
+        </ul>
+      </section>
+    </aside>
+
+    <section class="map-shell">
+      <div id="map"></div>
+      <div class="overlay-banner" id="overlayBanner">ECMWF · All Layers · +0h</div>
+    </section>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="app.js"></script>
+</body>
+</html>
