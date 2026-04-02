@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>India Weather Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <h1>🇮🇳 India Weather Dashboard</h1>
+        <p>
+          Live temperature, humidity, rainfall maps, fog forecast, cyclone alerts,
+          and latest weather news.
+        </p>
+      </div>
+      <div class="controls">
+        <label for="citySelect">Select City</label>
+        <select id="citySelect"></select>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="card metrics">
+        <h2>Current Metrics</h2>
+        <div id="metricsGrid" class="metrics-grid"></div>
+      </section>
+
+      <section class="card forecast">
+        <h2>Fog Forecast (Next 24 Hours)</h2>
+        <div id="fogSummary" class="status-pill">Loading...</div>
+        <div id="fogTimeline" class="timeline"></div>
+      </section>
+
+      <section class="card map-card">
+        <div class="map-header">
+          <h2>Rainfall & Fog Layer Map</h2>
+          <div class="layer-toggle">
+            <button data-layer="precipitation_new" class="active">Rainfall</button>
+            <button data-layer="clouds_new">Fog/Clouds</button>
+          </div>
+        </div>
+        <div id="weatherMap"></div>
+      </section>
+
+      <section class="card cyclone">
+        <h2>Cyclone Tracker Alert UI</h2>
+        <div id="cycloneAlert" class="alert-box">Scanning coastal stations...</div>
+        <div id="cycloneGrid" class="cyclone-grid"></div>
+      </section>
+
+      <section class="card news">
+        <h2>Latest Weather News</h2>
+        <ul id="newsList" class="news-list"></ul>
+      </section>
+
+      <section class="card errors">
+        <h2>API / Runtime Error Log</h2>
+        <p class="small">This collects API/network/runtime issues for easier debugging.</p>
+        <ul id="errorList" class="error-list"></ul>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
